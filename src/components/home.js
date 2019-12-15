@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import {getUsers} from '../services/userService';
-import moment from "moment";
-
-
+import UserCards from "../resusable/card";
 
 class Home extends Component {
 
@@ -200,52 +198,10 @@ class Home extends Component {
                       <h4 className="no-user text-center">No User Found</h4>
                      }
 
-
-                     {userList.map(user => (
-                       
-                         <div className="user-card" key={user.id}>
-                            <div className="user-img">
-                                 <div className="img-caption">
-                                    <div className="heading">{user.name}</div>
-                                    <div className="content">id : {user.id} . {moment(user.created).fromNow()}</div>
-                                 </div>
-                                 <img src={user.image} alt={user.name}/>
-                            </div>
-
-                            <div className="user-content">
-                                <table className="table user-table">
-                                  <tbody>
-                                    <tr>
-                                      <td className="text-left"><span className="heading">Status</span></td>
-                                      <td className="text-right"><span className="txt">{user.status}</span></td>
-                                    </tr>
-                                    <tr>
-                                      <td className="text-left"><span className="heading">Species</span></td>
-                                      <td className="text-right"><span className="txt">{user.species}</span></td>
-                                    </tr>
-
-                                    <tr>
-                                      <td className="text-left"><span className="heading">Gender</span></td>
-                                      <td className="text-right"><span className="txt">{user.gender}</span></td>
-                                    </tr>
-
-                                    <tr>
-                                      <td className="text-left"><span className="heading">Origin</span></td>
-                                     <td className="text-right"><span className="txt">{user.origin.name}</span></td>
-                                    </tr>
-
-                                    <tr>
-                                      <td className="text-left"><span className="heading">Last Location</span></td>
-                                      <td className="text-right"><span className="txt">{user.location.name}</span></td>
-                                    </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                         </div>
-
-                      ))} 
-
-                        
+                     <UserCards
+                        userList = {userList}
+                     />
+                                           
                      </div>
                 </div>
              </div>
