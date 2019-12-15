@@ -9,6 +9,7 @@ class Home extends Component {
 
   state={
     userList:[],
+    permanentUserList:[],
     userName:'',
     appliedFilters:[]
   }
@@ -22,8 +23,8 @@ class Home extends Component {
   async getUsers(){
     const { data } = await getUsers();
     const userList = data.results;
-    localStorage.setItem("userList", JSON.stringify(userList));
-    this.setState({userList});
+    const permanentUserList = data.results;
+    this.setState({userList,permanentUserList});
   }
 
 
@@ -59,12 +60,14 @@ class Home extends Component {
    var isCheck = event.target.checked;
    var category = event.target.value;
    var appliedFilters = [...this.state.appliedFilters];
+  
    
    if(isCheck){
     appliedFilters.push({name:name,category:category});
    }else{
     appliedFilters = appliedFilters.filter(list => list.name !== name);
    }
+
    this.setState({appliedFilters:appliedFilters});
  }
 
@@ -112,8 +115,8 @@ class Home extends Component {
  handleSubmit = () =>{
   const userName = this.state.userName;
   if(userName){
-    const userList = [...this.state.userList];
-    const sortedUserList = userList.filter( val => val.name.toLowerCase() === userName.toLowerCase());
+    const permanentUserList = [...this.state.permanentUserList];
+    const sortedUserList = permanentUserList.filter( val => val.name.toLowerCase().includes(userName.toLowerCase()));
     this.setState({userList:sortedUserList});
   }else{
     this.getUsers();
@@ -169,7 +172,7 @@ class Home extends Component {
                           <h5 className="tags-head">Selected Filters</h5>
                           <div>
                             {appliedFilters.map(list => (
-                               <div className="tags">{list.name}</div>
+                               <div className="tags" key={list.name}>{list.name}</div>
                             ))}
                           </div>
                       </div>
