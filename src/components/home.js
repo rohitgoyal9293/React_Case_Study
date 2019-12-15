@@ -94,6 +94,8 @@ class Home extends Component {
          }
      }    
    }  
+
+   this.setState({appliedFilters:appliedFilters})
    
    if(appliedFilters.length > 0){
      this.setState({userList:sortedUserList})
@@ -160,7 +162,7 @@ class Home extends Component {
                           <h5 className="tags-head">Selected Filters</h5>
                           <div>
                             {appliedFilters.map(list => (
-                               <div className="tags" key={list.name}>{list.name}</div>
+                               <div className="tags" key={list.name}>{list.name} &#9747;</div>
                             ))}
                           </div>
                       </div>
