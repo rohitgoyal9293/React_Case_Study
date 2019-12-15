@@ -60,55 +60,49 @@ class Home extends Component {
    var isCheck = event.target.checked;
    var category = event.target.value;
    var appliedFilters = [...this.state.appliedFilters];
+   var sortedUserList = [];
+   var userList = [];
   
    
    if(isCheck){
     appliedFilters.push({name:name,category:category});
+    userList = [...this.state.userList];
    }else{
     appliedFilters = appliedFilters.filter(list => list.name !== name);
+    userList = [...this.state.permanentUserList];
    }
 
-   this.setState({appliedFilters:appliedFilters});
+   for(let i=0; i < appliedFilters.length; i++){
+     for(let j=0; j < userList.length; j++){
+      
+         if(appliedFilters[i].category === 'species'){
+             if(appliedFilters[i].name ===  userList[j].species){
+                 sortedUserList = userList.filter(list => list.species === appliedFilters[i].name ); 
+             }
+         }
+
+         if(appliedFilters[i].category === 'gender'){
+           if(appliedFilters[i].name ===  userList[j].gender){
+             sortedUserList = userList.filter(list => list.gender === appliedFilters[i].name );
+           }
+         }
+
+         if(appliedFilters[i].category === 'origin'){
+           if(appliedFilters[i].name ===  userList[j].origin.name){
+             sortedUserList = userList.filter(list => list.origin.name === appliedFilters[i].name );
+           }
+         }
+     }    
+   }  
+   
+   if(appliedFilters.length > 0){
+     this.setState({userList:sortedUserList})
+   }else{
+     this.getUsers();
+   }   
+
  }
 
-
-// apply filter
-
- applyFilter = () =>{
-    var appliedFilters = [...this.state.appliedFilters];
-    var userList = [...this.state.userList];
-    var sortedUserList = [];
-
-    for(let i=0; i < userList.length; i++){
-      for(let j=0; j < appliedFilters.length; j++){
-       
-          if(appliedFilters[j].category === 'species'){
-              if(appliedFilters[j].name ===  userList[i].species){
-                  sortedUserList = userList.filter(list => list.species === appliedFilters[j].name ); 
-              }
-          }
-
-          if(appliedFilters[j].category === 'gender'){
-            if(appliedFilters[j].name ===  userList[i].gender){
-              sortedUserList = userList.filter(list => list.gender === appliedFilters[j].name );
-            }
-          }
-
-          if(appliedFilters[j].category === 'origin'){
-            if(appliedFilters[j].name ===  userList[i].origin.name){
-              sortedUserList = userList.filter(list => list.origin.name === appliedFilters[j].name );
-            }
-          }
-      }    
-    }  
-    
-    if(sortedUserList.length > 0){
-      this.setState({userList:sortedUserList})
-    }else{
-      this.getUsers();
-    }   
-       
- }
 
 // submit user search
 
@@ -153,12 +147,6 @@ class Home extends Component {
                       <div className="filter clearfix"><input name="Abadango" value="origin" onChange={this.handleFilterChange} type="checkbox"/> <span>Abadango</span></div>
                       <div className="filter clearfix"><input name="unknown" value="origin" onChange={this.handleFilterChange} type="checkbox"/> <span>unknown</span></div>
                   </div>
-
-                  <div className="filter-apply-cover">
-                      <button onClick={()=>this.applyFilter()} className="filterApply">Apply</button>
-                  </div>  
-
-
 
                 </div>
 
