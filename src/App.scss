@@ -2,7 +2,6 @@ section{
   padding: 20px 0;
 }
 
-
 .tags-cover{
   margin:10px 0 20px 0;
    
@@ -20,10 +19,13 @@ section{
 }
 
 .filtersSection{
+
   .filter-cover{
     padding: 10px;
-    border:1px solid #ccc;
+    border:2px solid #ccc;
     margin-bottom: 20px;
+    background:#fff;
+    border-radius: 2px;
     
     .filter{
 
@@ -64,6 +66,7 @@ section{
   flex-wrap: wrap;
   background: #1f232a;
   padding:10px 10px 0 10px; 
+  border-radius: 2px;
 
   .no-user{
     color:#fff;
