@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Route, Redirect, Switch, NavLink} from "react-router-dom";
+import {Route, Redirect, Switch} from "react-router-dom";
 import Home from './components/home';
 import "./App.scss";
 

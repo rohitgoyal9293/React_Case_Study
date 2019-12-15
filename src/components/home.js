@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import axios from 'axios';
 import {getUsers} from '../services/userService';
 import moment from "moment";
 
@@ -210,7 +209,7 @@ class Home extends Component {
                                     <div className="heading">{user.name}</div>
                                     <div className="content">id : {user.id} . {moment(user.created).fromNow()}</div>
                                  </div>
-                                 <img src={user.image}/>
+                                 <img src={user.image} alt={user.name}/>
                             </div>
 
                             <div className="user-content">
